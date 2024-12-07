@@ -14,4 +14,4 @@ import { ApiConfigService } from "./config.service";
     providers : [ApiConfigService],
     exports : [ApiConfigService],
 })
-export class AppConfigModule{}
+export class AppConfigModule {}
