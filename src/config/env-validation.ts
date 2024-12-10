@@ -69,6 +69,26 @@ export class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   ACCESS_SECRET_KEY: string;
+
+  @IsNotEmpty()
+  @IsString()
+  POSTGRES_USER: string;
+
+  @IsNotEmpty()
+  @IsString()
+  POSTGRES_PASSWORD: string;
+
+  @IsNotEmpty()
+  @IsString()
+  POSTGRES_DB: string;
+
+  @IsNotEmpty()
+  @IsString()
+  PGADMIN_DEFAULT_EMAIL: string;
+
+  @IsNotEmpty()
+  @IsString()
+  PGADMIN_DEFAULT_PASSWORD: string;
 }
 
 export function validate(config: Record<string, unknown>) {
@@ -82,6 +102,6 @@ export function validate(config: Record<string, unknown>) {
 
   if (errors.length > 0) {
     throw new Error(errors.toString());
-  };
+  }
   return validatedConfig;
 }
