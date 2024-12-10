@@ -20,6 +20,7 @@ export class EnvironmentVariables {
   @Max(65535)
   PORT: number;
 
+  @IsNotEmpty()
   @IsString()
   API_PREFIX: string;
 
@@ -46,9 +47,11 @@ export class EnvironmentVariables {
   @Max(65535)
   DATABASE_PORT: number;
 
+  @IsNotEmpty()
   @IsString()
   DATABASE_USER: string;
 
+  @IsNotEmpty()
   @IsString()
   DATABASE_PASSWORD: string;
 
