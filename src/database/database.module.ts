@@ -10,11 +10,11 @@ import { ApiConfigService } from 'src/config/config.service';
       inject: [ApiConfigService],
       useFactory: (apiConfigService: ApiConfigService) => ({
         type : 'postgres',
-        host: apiConfigService.getValue('DATABASE_HOST'),
-        port: apiConfigService.getValue('DATABASE_PORT'),
-        username: apiConfigService.getValue('DATABASE_USER'),
-        password: apiConfigService.getValue('DATABASE_PASSWORD'),
-        database: apiConfigService.getValue('DATABASE_NAME'),
+        host: apiConfigService.getValue('POSTGRES_HOST'),
+        port: apiConfigService.getValue('POSTGRES_PORT'),
+        username: apiConfigService.getValue('POSTGRES_USER'),
+        password: apiConfigService.getValue('POSTGRES_PASSWORD'),
+        database: apiConfigService.getValue('POSTGRES_DB'),
         autoLoadEntities: true, // Automatically load entities
         synchronize: true, // Synchronize schema (use cautiously in production)
       }),
