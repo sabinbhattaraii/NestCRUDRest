@@ -1,32 +1,43 @@
-
-version: "3"
 services:
   postgres:
     container_name: postgres
     image: postgres:latest
     ports:
-    - "5432:5432"
+      - '5432:5432'
     volumes:
-    - /data/postgres:/data/postgres
+      - /data/postgres:/data/postgres
     env_file:
-    - .docker.env
+      - .env
     networks:
-    - postgres
- 
+      - postgres
+
   pgadmin:
     links:
-    - postgres:postgres
+      - postgres:postgres
     container_name: pgadmin
     image: dpage/pgadmin4
     ports:
-    - "8080:80"
+      - '8080:80'
     volumes:
-    - /data/pgadmin:/root/.pgadmin
+      - /data/pgadmin:/root/.pgadmin
     env_file:
-    - .docker.env
+      - .env
     networks:
-    - postgres
- 
+      - postgres
+
+  nestjs:
+    build:
+      context: .
+    container_name: nestjs
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    networks:
+      - postgres
+
 networks:
   postgres:
     driver: bridge

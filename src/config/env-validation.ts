@@ -39,24 +39,24 @@ export class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
-  DATABASE_HOST: string;
+  POSTGRES_HOST: string;
 
   @IsNotEmpty()
   @IsNumber()
   @Min(0)
   @Max(65535)
-  DATABASE_PORT: number;
+  POSTGRES_PORT: number;
 
   @IsNotEmpty()
   @IsString()
-  DATABASE_USER: string;
+  POSTGRES_USER: string;
 
   @IsNotEmpty()
   @IsString()
-  DATABASE_PASSWORD: string;
+  POSTGRES_PASSWORD: string;
 
   @IsString()
-  DATABASE_NAME: string;
+  POSTGRES_DB: string;
 
   @IsString()
   @IsNotEmpty()
@@ -69,18 +69,6 @@ export class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   ACCESS_SECRET_KEY: string;
-
-  @IsNotEmpty()
-  @IsString()
-  POSTGRES_USER: string;
-
-  @IsNotEmpty()
-  @IsString()
-  POSTGRES_PASSWORD: string;
-
-  @IsNotEmpty()
-  @IsString()
-  POSTGRES_DB: string;
 
   @IsNotEmpty()
   @IsString()
