@@ -21,6 +21,9 @@ export class User {
   @Column({ type: 'varchar', length: 255, select: false })
   password: string;
 
+  @Column({ type : 'boolean' , default: false})
+  isVerified : boolean;
+
   @CreateDateColumn()
   created_on: Date;
 
