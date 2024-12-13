@@ -10,9 +10,9 @@ import {
 } from 'typeorm';
 
 @Entity('users')
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({ type: 'varchar', length: 255 })
   name: string;
