@@ -2,6 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ApiConfigService } from './config/config.service';
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import {
+  DocumentBuilder,
+  SwaggerCustomOptions,
+  SwaggerModule,
+} from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -43,6 +48,25 @@ async function bootstrap() {
   app.enableCors(); // cross site origin enabled
 
   const apiConfigService = app.get(ApiConfigService);
+
+  // Swagger implementation
+  const customOptions: SwaggerCustomOptions = {
+    swaggerOptions: { docExpansion: 'none', persistAuthorization: true },
+    customCss: '.swagger-ui .topbar {display: none}',
+    customSiteTitle: apiConfigService.getValue('API_TITLE'),
+  };
+
+  const options = new DocumentBuilder()
+    .setTitle(apiConfigService.getValue('API_TITLE'))
+    .setDescription(apiConfigService.getValue('API_DESCRIPTION'))
+    .setVersion(apiConfigService.getValue('API_VERSION'))
+    .addBasicAuth()
+    .addServer(
+      `${apiConfigService.getValue('HOST')}:${apiConfigService.getValue('PORT')}`,
+    )
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('/docs', app, document, customOptions);
 
   console.log(
     `Api Started in ${apiConfigService.getValue('HOST')}:${apiConfigService.getValue('PORT')}`,
