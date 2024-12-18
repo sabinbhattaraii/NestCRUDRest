@@ -1,9 +1,9 @@
-import { Body, Controller, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Controller('users')
-export class UsersController {}
+export class UsersController {
   constructor() {}
 
   @Post()
