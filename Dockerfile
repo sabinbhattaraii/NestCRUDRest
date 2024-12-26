@@ -1,6 +1,9 @@
 # Use Node.js LTS version
 FROM node:16-alpine
 
+# Install PostgreSQL client (psql)
+RUN apk update && apk add postgresql-client
+
 # Set working directory
 WORKDIR /usr/src/app
 
@@ -12,6 +15,9 @@ RUN npm install
 
 # Copy the entire application
 COPY . .
+
+# Build the app
+RUN npm run build
 
 # Expose the application port
 EXPOSE 3000

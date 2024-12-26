@@ -14,14 +14,21 @@ async function createDataSource() {
     username: apiConfigService.getValue('POSTGRES_USER'),
     password: apiConfigService.getValue('POSTGRES_PASSWORD'),
     database: apiConfigService.getValue('POSTGRES_DB'),
-    entities: [__dirname + '/../src/**/*.entity{.ts,.js}'],
-    migrations: [__dirname + '/../migrations/*{.ts,.js}'],
+    entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+    migrations: ['src/migrations/*{.ts,.js}'],
     migrationsTableName: 'migrations',
     logging: true,
     synchronize: true,
   };
   const dataSource = new DataSource(dataSourceOptions);
-  await dataSource.initialize();
+  dataSource
+    .initialize()
+    .then(() => {
+      console.log('Data Source has been initialized!');
+    })
+    .catch((err) => {
+      console.error('Error during Data Source initialization:', err);
+    });
   return dataSource;
 }
 

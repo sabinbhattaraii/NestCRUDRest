@@ -35,8 +35,14 @@ services:
       - '3000:3000'
     env_file:
       - .env
+    volumes:
+      - .:/usr/src/app # Mount the local project directory to the container
+    working_dir: /usr/src/app
+    command: ['npm', 'run', 'start:dev']
     networks:
       - postgres
+    user: node
+
 
 networks:
   postgres:

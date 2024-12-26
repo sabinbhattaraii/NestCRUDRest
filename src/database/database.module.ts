@@ -16,7 +16,11 @@ import { ApiConfigService } from 'src/config/config.service';
         password: apiConfigService.getValue('POSTGRES_PASSWORD'),
         database: apiConfigService.getValue('POSTGRES_DB'),
         autoLoadEntities: true, // Automatically load entities
-        synchronize: true, // Synchronize schema (use cautiously in production)
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        migrations: ['src/migrations/*{.ts,.js}'], // Ensure migrations are included
+        migrationsTableName: 'migrations',
+        logging: true,
+        synchronize: true, // Synchronize schema 
       }),
     }),
   ],
