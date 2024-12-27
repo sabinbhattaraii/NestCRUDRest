@@ -41,7 +41,7 @@ services:
     command: ['npm', 'run', 'start:dev']
     networks:
       - postgres
-    user: node
+    user: root
 
 
 networks:
