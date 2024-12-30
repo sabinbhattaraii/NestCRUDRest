@@ -1,5 +1,8 @@
 # Use Node.js LTS version
-FROM node:16-alpine
+FROM node:18-alpine
+
+# Switch to the root user
+USER root
 
 # Set working directory
 WORKDIR /usr/src/app
@@ -16,11 +19,11 @@ RUN apk update && apk add postgresql-client
 # Install dependencies
 RUN npm install
 
-# Build the app
-RUN npm run build
-
 # Expose the application port
 EXPOSE 3000
 
+# Build the app
+RUN npm run build
+
 # Start the application
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:dev"]

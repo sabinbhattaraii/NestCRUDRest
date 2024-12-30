@@ -73,5 +73,5 @@ async function bootstrap() {
   );
 
   await app.listen(apiConfigService.getValue('PORT'));
-}
+} 
 bootstrap();

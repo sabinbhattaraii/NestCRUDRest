@@ -3,7 +3,7 @@ services:
     container_name: postgres
     image: postgres:latest
     ports:
-      - '5432:5432'
+      - '127.0.0.1:5432:5432'
     volumes:
       - /data/postgres:/data/postgres
     env_file:
@@ -17,7 +17,7 @@ services:
     container_name: pgadmin
     image: dpage/pgadmin4
     ports:
-      - '8080:80'
+      - '127.0.0.1:8080:80'
     volumes:
       - /data/pgadmin:/root/.pgadmin
     env_file:
@@ -35,13 +35,10 @@ services:
       - '3000:3000'
     env_file:
       - .env
-    volumes:
-      - .:/usr/src/app # Mount the local project directory to the container
-    working_dir: /usr/src/app
-    command: ['npm', 'run', 'start:dev']
+    volumes: 
+      - .:/app
     networks:
       - postgres
-    user: root
 
 
 networks:
