@@ -1,3 +1,4 @@
+import { Gender, UserRole } from '@/common/enums/user-role.enum';
 import { Exclude } from 'class-transformer';
 import { IsEmail, Matches, MinLength } from 'class-validator';
 import {
@@ -15,7 +16,13 @@ export class UserEntity {
   id: number;
 
   @Column({ type: 'varchar', length: 255 })
-  name: string;
+  firstName: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  middleName: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  lastName: string;
 
   @Column({ type: 'varchar', unique: true })
   @IsEmail()
@@ -30,8 +37,29 @@ export class UserEntity {
   @Column({ type: 'varchar', select: false })
   password: string;
 
-  @Column({ type : 'boolean' , default: false})
-  isVerified : boolean;
+  @Column({ type: 'enum', enum: Gender, default: Gender.Other })
+  gender: Gender;
+
+  @Column({ type: 'varchar', length: 255 })
+  address: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  shippingAddress: string;
+
+  @Column({ type: 'varchar', length: 50 })
+  contactNumber: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  country: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  city: string;
+
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.User })
+  role: UserRole;
+
+  @Column({ type: 'boolean', default: false })
+  isVerified: boolean;
 
   @CreateDateColumn()
   created_on: Date;
@@ -39,6 +67,6 @@ export class UserEntity {
   @UpdateDateColumn()
   updated_on: Date;
 
-  @DeleteDateColumn({ nullable: true , select : false})
+  @DeleteDateColumn({ nullable: true, select: false })
   deleted_on: Date;
 }
