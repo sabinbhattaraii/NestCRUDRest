@@ -1,9 +1,6 @@
 # Use Node.js LTS version
 FROM node:18-alpine
 
-# Switch to the root user
-USER root
-
 # Set working directory
 WORKDIR /usr/src/app
 
@@ -12,9 +9,6 @@ COPY package*.json ./
 
 # Copy the entire application
 COPY . .
-
-# Install PostgreSQL client (psql)
-RUN apk update && apk add postgresql-client
 
 # Install dependencies
 RUN npm install
