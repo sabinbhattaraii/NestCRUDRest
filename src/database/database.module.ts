@@ -18,14 +18,14 @@ import { DataSource } from 'typeorm';
         database: apiConfigService.getValue('POSTGRES_DB'),
         autoLoadEntities: true, // Automatically load entities
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        migrations: ['src/migrations/*{.ts,.js}'], // Ensure migrations are included
+        migrations: [__dirname + '/migrations/*{.ts,.js}'], // Ensure migrations are included
         migrationsTableName: 'migrations',
         logging: true,
-        synchronize: true, // Synchronize schema 
+        synchronize: false, // Synchronize schema 
       }),
       dataSourceFactory : async (options) => {
         const dataSource = new DataSource(options)
-        dataSource.initialize()
+        await dataSource.initialize()
         .then(() => {
           console.log('Data Source has been initialized!');
         })
