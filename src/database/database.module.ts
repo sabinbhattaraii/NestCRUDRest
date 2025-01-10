@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppConfigModule } from 'src/config/config.module';
 import { ApiConfigService } from 'src/config/config.service';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -22,6 +23,17 @@ import { ApiConfigService } from 'src/config/config.service';
         logging: true,
         synchronize: true, // Synchronize schema 
       }),
+      dataSourceFactory : async (options) => {
+        const dataSource = new DataSource(options)
+        dataSource.initialize()
+        .then(() => {
+          console.log('Data Source has been initialized!');
+        })
+        .catch((err) => {
+          console.error('Error during Data Source initialization:', err);
+        });
+        return dataSource;
+      },
     }),
   ],
 })
