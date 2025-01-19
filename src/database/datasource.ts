@@ -15,7 +15,7 @@ export async function createDataSource(): Promise<DataSource> {
     password: apiConfigService.getValue('POSTGRES_PASSWORD'),
     database: apiConfigService.getValue('POSTGRES_DB'),
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    migrations: [__dirname + '/migrations/*{.ts,.js}'], // Ensure migrations are included
+    migrations: [__dirname + '/../migrations/*{.ts,.js}'], // Ensure migrations are included
     migrationsTableName: 'migrations',
     logging: true,
     synchronize: false, // Synchronize schema
