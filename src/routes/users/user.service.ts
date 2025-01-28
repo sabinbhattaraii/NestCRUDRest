@@ -34,7 +34,7 @@ export class UserService {
    * @param id
    * @return user
    */
-  async findOne(id: string): Promise<UserEntity> {
+  async findOne(id: number): Promise<UserEntity> {
     return await this.userRepository.findOne({
         where: { id },
     });
@@ -46,7 +46,7 @@ export class UserService {
    * @param dto
    */
   async update(
-    id: string,
+    id: number,
     updateUserDto: UpdateUserDto,
   ): Promise<UpdateUserDto> {
     await this.userRepository.update(id, updateUserDto);
